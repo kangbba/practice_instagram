@@ -1,4 +1,4 @@
-package com.kangbba.practice_insta
+package com.kangbba.practiceinsta
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:practice_insta/models/gallery_state.dart';
+import 'package:practiceinsta/models/gallery_state.dart';
 import 'package:local_image_provider/local_image_provider.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

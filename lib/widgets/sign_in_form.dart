@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:practice_insta/constants/common_size.dart';
-import 'package:practice_insta/home_page.dart';
+import 'package:practiceinsta/constants/common_size.dart';
+import 'package:practiceinsta/home_page.dart';
+import 'package:practiceinsta/models/firebase_auth_state.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/auth_input_decor.dart';
 import '../constants/etc.dart';
@@ -77,12 +79,8 @@ class _SignInFormState extends State<SignInForm> {
                 style: flatButtonStyle_blue,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    print('validation success');
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        )
-                    );
+                    print('일반 login 으로 signin 상태변경 ');
+                    Provider.of<FirebaseAuthState>(context, listen : false).changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
                   }
                 },
                 child: Text(
@@ -94,7 +92,6 @@ class _SignInFormState extends State<SignInForm> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                     onPressed: () {
-                      print('pressed');
                     },
                     style:  ButtonStyle( overlayColor: MaterialStateProperty.all<Color>(Colors.black12), ),
                     child: Text('Forgotten Password', style: TextStyle(color: Colors.blue),)
@@ -107,11 +104,8 @@ class _SignInFormState extends State<SignInForm> {
               ElevatedButton.icon(
                 onPressed: () {
                   setState(() {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        )
-                    );
+                    print('Facebook login 으로 signin 상태변경 ');
+                    Provider.of<FirebaseAuthState>(context, listen : false).changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
                   });
                 },
                 icon: ImageIcon(AssetImage('assets/images/facebook.png')),

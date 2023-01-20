@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kangbba.practice_insta">
+    package="com.kangbba.practiceinsta">
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
    <application
-        android:label="practice_insta"
+        android:label="practiceinsta"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

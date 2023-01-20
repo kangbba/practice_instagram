@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:practice_insta/screens/profile_screen.dart';
-import 'package:practice_insta/widgets/sign_in_form.dart';
-import 'package:practice_insta/widgets/sign_up_form.dart';
+import 'package:practiceinsta/screens/profile_screen.dart';
+import 'package:practiceinsta/widgets/sign_in_form.dart';
+import 'package:practiceinsta/widgets/sign_up_form.dart';
 
 import '../widgets/fade_stack.dart';
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../models/firebase_auth_state.dart';
 import '../screens/auth_screen.dart';
 
 class ProfileSideMenu extends StatelessWidget {
@@ -23,10 +25,9 @@ class ProfileSideMenu extends StatelessWidget {
               leading: Icon(Icons.exit_to_app, color: Colors.black87,),
               title: Text('Sign Out'),
               onTap: (){
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => AuthScreen())
-                );
+                print('signout 상태변경 ');
+                Provider.of<FirebaseAuthState>(context, listen : false).changeFirebaseAuthStatus(FirebaseAuthStatus.signout);
+
               },
             ),
 

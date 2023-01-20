@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:practice_insta/constants/common_size.dart';
-import 'package:practice_insta/widgets/profile_body.dart';
-import 'package:practice_insta/widgets/profile_side_menu.dart';
+import 'package:practiceinsta/constants/common_size.dart';
+import 'package:practiceinsta/widgets/profile_body.dart';
+import 'package:practiceinsta/widgets/profile_side_menu.dart';
 
 import '../constants/screen_size.dart';
 enum MenuStatus

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "224278851366",
+    "project_id": "practice-instagram-c24fb",
+    "storage_bucket": "practice-instagram-c24fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:224278851366:android:c3966c9092698796349be7",
+        "android_client_info": {
+          "package_name": "com.kangbba.practiceinsta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "224278851366-2chkg5mrf1r6vap7rsmt5dnchvt2i37q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYLRx2ozQuRw1F9cV4sTxcAgORFcBKCqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "224278851366-2chkg5mrf1r6vap7rsmt5dnchvt2i37q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:practice_insta/models/camera_state.dart';
-import 'package:practice_insta/models/gallery_state.dart';
-import 'package:practice_insta/widgets/my_gallery.dart';
+import 'package:practiceinsta/models/camera_state.dart';
+import 'package:practiceinsta/models/gallery_state.dart';
+import 'package:practiceinsta/widgets/my_gallery.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/take_photo.dart';

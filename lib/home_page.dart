@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_insta/screens/camera_screen.dart';
-import 'package:practice_insta/screens/feed_screen.dart';
-import 'package:practice_insta/screens/profile_screen.dart';
-import 'package:practice_insta/screens/search_screen.dart';
+import 'package:practiceinsta/screens/camera_screen.dart';
+import 'package:practiceinsta/screens/feed_screen.dart';
+import 'package:practiceinsta/screens/profile_screen.dart';
+import 'package:practiceinsta/screens/search_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:camera/camera.dart';

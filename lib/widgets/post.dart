@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_insta/widgets/my_progress_indicator.dart';
+import 'package:practiceinsta/widgets/my_progress_indicator.dart';
 
 import '../constants/common_size.dart';
 import 'comment.dart';

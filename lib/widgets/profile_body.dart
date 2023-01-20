@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_insta/screens/profile_screen.dart';
-import 'package:practice_insta/widgets/rounded_avatar.dart';
+import 'package:practiceinsta/screens/profile_screen.dart';
+import 'package:practiceinsta/widgets/rounded_avatar.dart';
 
 import '../constants/common_size.dart';
 import '../constants/screen_size.dart';

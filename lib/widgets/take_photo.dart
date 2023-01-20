@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_insta/constants/common_size.dart';
-import 'package:practice_insta/models/camera_state.dart';
-import 'package:practice_insta/screens/share_post_screen.dart';
-import 'package:practice_insta/widgets/my_progress_indicator.dart';
+import 'package:practiceinsta/constants/common_size.dart';
+import 'package:practiceinsta/models/camera_state.dart';
+import 'package:practiceinsta/screens/share_post_screen.dart';
+import 'package:practiceinsta/widgets/my_progress_indicator.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';

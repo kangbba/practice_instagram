@@ -1,6 +1,6 @@
 {
-    "name": "practice_insta",
-    "short_name": "practice_insta",
+    "name": "practiceinsta",
+    "short_name": "practiceinsta",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

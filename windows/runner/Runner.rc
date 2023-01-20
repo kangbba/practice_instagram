@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.kangbba" "\0"
-            VALUE "FileDescription", "practice_insta" "\0"
+            VALUE "FileDescription", "practiceinsta" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "practice_insta" "\0"
+            VALUE "InternalName", "practiceinsta" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.kangbba. All rights reserved." "\0"
-            VALUE "OriginalFilename", "practice_insta.exe" "\0"
-            VALUE "ProductName", "practice_insta" "\0"
+            VALUE "OriginalFilename", "practiceinsta.exe" "\0"
+            VALUE "ProductName", "practiceinsta" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

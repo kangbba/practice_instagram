@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:practice_insta/constants/common_size.dart';
-import 'package:practice_insta/widgets/rounded_avatar.dart';
+import 'package:practiceinsta/constants/common_size.dart';
+import 'package:practiceinsta/widgets/rounded_avatar.dart';
 
 class Comment extends StatelessWidget {
 

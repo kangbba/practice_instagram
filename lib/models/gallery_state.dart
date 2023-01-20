@@ -19,7 +19,6 @@ class GalleryState extends ChangeNotifier{
       return false;
     }
   }
-  /////
 
   List<LocalImage> get images => _images;
   LocalImageProvider get localImageProvider => _localImageProvider;

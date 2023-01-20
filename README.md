@@ -1,1 +1,1 @@
-# practice_instagram
+# practiceinsta

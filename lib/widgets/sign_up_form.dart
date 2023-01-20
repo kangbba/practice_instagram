@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practice_insta/constants/common_size.dart';
-import 'package:practice_insta/home_page.dart';
+import 'package:practiceinsta/constants/common_size.dart';
+import 'package:practiceinsta/home_page.dart';
 
 import '../constants/auth_input_decor.dart';
 import '../constants/etc.dart';

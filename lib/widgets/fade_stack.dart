@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:practice_insta/widgets/sign_in_form.dart';
-import 'package:practice_insta/widgets/sign_up_form.dart';
+import 'package:practiceinsta/widgets/sign_in_form.dart';
+import 'package:practiceinsta/widgets/sign_up_form.dart';
 
 class FadeStack extends StatefulWidget {
   const FadeStack({Key? key, required this.selectedForm}) : super(key: key);
