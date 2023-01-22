@@ -60,14 +60,14 @@
       <dict>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string></string>
+        <string>fb576332060659583</string>
       </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string></string>
+    <string>576332060659583</string>
     <key>FacebookClientToken</key>
-    <string></string>
+    <string>2274fba13f20970dd7a3b6c27ff5edc8</string>
     <key>FacebookDisplayName</key>
     <string>practice_clon</string>
 

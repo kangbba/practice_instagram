@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">practiceInsta</string>
-    <string name="facebook_app_id"></string>
-    <string name="fb_login_protocol_scheme"></string>
-    <string name="facebook_client_token"></string>
+    <string name="facebook_app_id">576332060659583</string>
+    <string name="fb_login_protocol_scheme">fb576332060659583</string>
+    <string name="facebook_client_token">2274fba13f20970dd7a3b6c27ff5edc8</string>
 </resources>
