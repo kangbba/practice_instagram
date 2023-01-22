@@ -15,8 +15,8 @@ class MyProgressIndicator extends StatelessWidget {
       height: containerSize,
       child: Center(
         child: SizedBox(
-          height: 60,
-          width: 60,
+          height: progressSize,
+          width: progressSize,
           child: Image.asset('assets/images/loading_img.gif'),
         ),
       ),
