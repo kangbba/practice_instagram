@@ -133,6 +133,3 @@ app.*.symbols
 
 
 #secrets
-
-**/ios/Runner/Info.plist
-**/android/app/src/main/res/values/strings.xml
