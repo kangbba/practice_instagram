@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:path/path.dart';
+import 'package:practiceinsta/utils/simple_snackbar.dart';
 
 enum FirebaseAuthStatus {signout, signin}
 
@@ -29,11 +31,45 @@ class FirebaseAuthState extends ChangeNotifier {
     });
   }
 
-  void signInWithFacebook()
+  void signInWithFacebook(BuildContext context) async
   {
     print('signInWithFacebook 완료');
+    final facebookLogin = FacebookLogin();
+    final result = await facebookLogin.logIn(customPermissions: ['email']);
+
+    if(result.accessToken == null)
+    {
+      throw('access token is null');
+    }
+    switch(result.status)
+    {
+      case FacebookLoginStatus.success:
+        _handleFacebookTokenFirebase(context,  result.accessToken!.token);
+        break;
+      case FacebookLoginStatus.cancel:
+        simpleSnackbar(context, 'User cancel facebook sign in');
+        break;
+      case FacebookLoginStatus.error:
+        simpleSnackbar(context, 'error');
+        break;
+    }
     changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
-    _firebaseAuth.signInAnonymously();
+
+  }
+
+  void _handleFacebookTokenFirebase(BuildContext context, String token) async
+  {
+      AuthCredential credential = FacebookAuthProvider.credential(token);
+      final UserCredential userCredential =  await _firebaseAuth.signInWithCredential(credential);
+      if(userCredential.user == null)
+      {
+        simpleSnackbar(context, 'UserCredential 로그인이 잘안됐음');
+      }
+      else{
+        _firebaseUser = userCredential.user!;
+      }
+
+
   }
   void signIn(BuildContext context, String email, String pw)
   {
@@ -70,18 +106,7 @@ class FirebaseAuthState extends ChangeNotifier {
           _errorMessage = error.code;
           break;
       }
-      SnackBar snackBar = SnackBar(
-        content: Text(_errorMessage), //snack bar의 내용. icon, button같은것도 가능하다.
-        duration: Duration(milliseconds: 10000),
-        action: SnackBarAction( //추가로 작업을 넣기. 버튼넣기라 생각하면 편하다.
-          label: 'OK', //버튼이름
-
-          onPressed: (){
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          }, //버튼 눌렀을때.
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      simpleSnackbar(context, _errorMessage);
       isSignInProgress = false;
       notifyListeners();
     })
@@ -127,18 +152,7 @@ class FirebaseAuthState extends ChangeNotifier {
               _errorMessage = "없는 에러";
               break;
           }
-          SnackBar snackBar = SnackBar(
-            content: Text(_errorMessage), //snack bar의 내용. icon, button같은것도 가능하다.
-            duration: Duration(milliseconds: 10000),
-            action: SnackBarAction( //추가로 작업을 넣기. 버튼넣기라 생각하면 편하다.
-              label: 'OK', //버튼이름
-
-              onPressed: (){
-                ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              }, //버튼 눌렀을때.
-            ),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          simpleSnackbar(context, _errorMessage);
           isSignInProgress = false;
           notifyListeners();
     })

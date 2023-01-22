@@ -9,6 +9,7 @@ import 'package:practiceinsta/screens/search_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:camera/camera.dart';
+import 'package:practiceinsta/utils/simple_snackbar.dart';
 import 'constants/screen_size.dart';
 
 class HomePage extends StatefulWidget {
