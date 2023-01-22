@@ -93,7 +93,7 @@ class _SignInFormState extends State<SignInForm> {
                 SizedBox(height: common_l_gap),
                 OrDivider(),
                 SizedBox(height: common_l_gap),
-                signInBtnWithFacebook(context),
+                _signInBtnWithFacebook(context),
               ],
             ),
           ),
@@ -102,12 +102,12 @@ class _SignInFormState extends State<SignInForm> {
     });
   }
 
-  ElevatedButton signInBtnWithFacebook(BuildContext context) {
+  ElevatedButton _signInBtnWithFacebook(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {
         setState(() {
           print('Facebook login 으로 signin 상태변경 ');
-          Provider.of<FirebaseAuthState>(context, listen : false).signInWithFacebook();
+          Provider.of<FirebaseAuthState>(context, listen : false).signInWithFacebook(context);
         });
       },
       icon: ImageIcon(AssetImage('assets/images/facebook.png')),

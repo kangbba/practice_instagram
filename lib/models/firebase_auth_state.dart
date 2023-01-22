@@ -35,8 +35,11 @@ class FirebaseAuthState extends ChangeNotifier {
   {
     print('signInWithFacebook 완료');
     final facebookLogin = FacebookLogin();
+    isSignInProgress = true;
+    notifyListeners();
     final result = await facebookLogin.logIn(customPermissions: ['email']);
-
+    isSignInProgress = false;
+    notifyListeners();
     if(result.accessToken == null)
     {
       throw('access token is null');

@@ -101,18 +101,6 @@ class _SignUpFormState extends State<SignUpForm> {
                 SizedBox(height: common_l_gap),
                 OrDivider(),
                 SizedBox(height: common_l_gap),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                            builder: (context) => HomePage()
-                        )
-                    );
-                  },
-                  icon: ImageIcon(AssetImage('assets/images/facebook.png')),
-                  label: Text('Login with Facebook'), // <-- Text
-                  style: FlatButtonStyle(Colors.blue, Colors.white, true),
-                ),
               ],
             ),
           ),
@@ -120,8 +108,6 @@ class _SignUpFormState extends State<SignUpForm> {
       );
     });
   }
-
-
   TextButton _joinButton(BuildContext context, String email, String pw) {
     return TextButton(
       style: flatButtonStyle_blue,

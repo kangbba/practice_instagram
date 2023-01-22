@@ -10,14 +10,16 @@ class MyProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: containerSize,
-      height: containerSize,
-      child: Center(
-        child: SizedBox(
-          height: progressSize,
-          width: progressSize,
-          child: Image.asset('assets/images/loading_img.gif'),
+    return Expanded(
+      child: Container(
+        width: containerSize,
+        height: containerSize,
+        child: Center(
+          child: SizedBox(
+            height: progressSize,
+            width: progressSize,
+            child: Image.asset('assets/images/loading_img.gif'),
+          ),
         ),
       ),
     );
