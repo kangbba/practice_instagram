@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:path/path.dart';
+import 'package:practiceinsta/repo/user_network_repository.dart';
 import 'package:practiceinsta/utils/simple_snackbar.dart';
 
 enum FirebaseAuthStatus {signout, signin}
@@ -120,49 +121,44 @@ class FirebaseAuthState extends ChangeNotifier {
       changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
     });
   }
-  void signUp(BuildContext context, String mEmail, String mPassword) {
+  void signUp(BuildContext context, String mEmail, String mPassword) async {
     print('signUp 완료');
     isSignInProgress = true;
     notifyListeners();
-    _firebaseAuth
-        .createUserWithEmailAndPassword(
-        email: mEmail.trim(),
-        password: mPassword.trim())
+    UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: mEmail.trim(),password: mPassword.trim())
         .catchError((error) {
-          print(error.code);
-          String _errorMessage = "";
-          switch(error.code)
-          {
-            //**email-already-in-use**:
-          // Thrown if there already exists an account with the given email address.
-          // **invalid-email**:
-          // Thrown if the email address is not valid.
-          // **operation-not-allowed**:
-          // Thrown if email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.
-          // **weak-password**:
-            case 'weak-password':
-              _errorMessage = "패스워드 약합니다";
-              break;
-            case 'operation-not-allowed':
-              _errorMessage = "작동이 허가되지 않음";
-              break;
-            case 'invalid-email':
-              _errorMessage = "이메일주소가 유효하지 않습니다";
-              break;
-            case 'email-already-in-use':
-              _errorMessage = "이미 있는 이메일입니다";
-              break;
-            default:
-              _errorMessage = "없는 에러";
-              break;
-          }
-          simpleSnackbar(context, _errorMessage);
-          isSignInProgress = false;
-          notifyListeners();
-    })
-        .then((value) { (signIn(context, mEmail, mPassword) );
+      String _errorMessage = "";
+      switch (error.code) {
+        case 'weak-password':
+          _errorMessage = "패스워드 약합니다";
+          break;
+        case 'operation-not-allowed':
+          _errorMessage = "작동이 허가되지 않음";
+          break;
+        case 'invalid-email':
+          _errorMessage = "이메일주소가 유효하지 않습니다";
+          break;
+        case 'email-already-in-use':
+          _errorMessage = "이미 있는 이메일입니다";
+          break;
+        default:
+          _errorMessage = "없는 에러";
+          break;
+      }
+      simpleSnackbar(context, _errorMessage);
+      isSignInProgress = false;
+      notifyListeners();
     });
     notifyListeners();
+    User? user = userCredential.user;
+    if(user == null){
+      simpleSnackbar(context, "Please try again later!");
+    }
+    else{
+      userNetworkRepository.attemptCreateUser(userKey : user.uid, email : user.email!);
+      signIn(context, mEmail, mPassword);
+    }
+
   }
   void signOut() async
   {
