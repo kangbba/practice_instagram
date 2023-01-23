@@ -12,6 +12,7 @@ class FirebaseAuthState extends ChangeNotifier {
 
   bool isSignInProgress = false;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FacebookLogin _facebookLogin = FacebookLogin();
   FirebaseAuthStatus _firebaseAuthStatus = FirebaseAuthStatus.signout;
   late User _firebaseUser;
 
@@ -34,10 +35,9 @@ class FirebaseAuthState extends ChangeNotifier {
   void signInWithFacebook(BuildContext context) async
   {
     print('signInWithFacebook 완료');
-    final facebookLogin = FacebookLogin();
     isSignInProgress = true;
     notifyListeners();
-    final result = await facebookLogin.logIn(customPermissions: ['email']);
+    final result = await _facebookLogin.logIn(customPermissions: ['email']);
     isSignInProgress = false;
     notifyListeners();
     if(result.accessToken == null)
@@ -53,6 +53,7 @@ class FirebaseAuthState extends ChangeNotifier {
         simpleSnackbar(context, 'User cancel facebook sign in');
         break;
       case FacebookLoginStatus.error:
+        _facebookLogin.logOut();
         simpleSnackbar(context, 'error');
         break;
     }
@@ -163,11 +164,18 @@ class FirebaseAuthState extends ChangeNotifier {
     });
     notifyListeners();
   }
-  void signOut()
+  void signOut() async
   {
     print('signOut 완료');
     changeFirebaseAuthStatus(FirebaseAuthStatus.signout);
-    _firebaseAuth.signOut();
+    await _firebaseAuth.signOut();
+    if(_facebookLogin != null)
+    {
+      if(await _facebookLogin.isLoggedIn)
+      {
+        await _facebookLogin.logOut();
+      }
+    }
   }
   void changeFirebaseAuthStatus(FirebaseAuthStatus mFirebaseAuthStatus)
   {
