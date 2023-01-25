@@ -9,6 +9,7 @@ import 'helper/transformers.dart';
 
 class UserNetworkRepository with Transformers
 {
+
   Future<void> attemptCreateUser({required String userKey, required String email} ) async
   {
       final DocumentReference userRef = FirebaseFirestore.instance.collection(COLLECTION_USERS).doc(userKey);
@@ -18,13 +19,13 @@ class UserNetworkRepository with Transformers
         return await userRef.set(UserModel.getMapForCreateUser(email));
       }
   }
-  
   Stream<UserModel> getUserModelStream(String userKey)
   {
     return FirebaseFirestore.instance
         .collection(COLLECTION_USERS)
         .doc(userKey)
-        .snapshots().transform(toUser!);
+        .snapshots().transform(toUser);
+
   }
 
 

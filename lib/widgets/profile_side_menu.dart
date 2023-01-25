@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:practiceinsta/models/firestore/user_model.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
 import 'package:provider/provider.dart';
 
 import '../models/firebase_auth_state.dart';
@@ -26,7 +28,8 @@ class ProfileSideMenu extends StatelessWidget {
               title: Text('Sign Out'),
               onTap: (){
                 print('signout 상태변경 ');
-                Provider.of<FirebaseAuthState>(context, listen : false).signOut();
+                UserModelState currentUserModelState = Provider.of<UserModelState>(context, listen: false);
+                Provider.of<FirebaseAuthState>(context, listen : false).signOut(currentUserModelState);
               },
             ),
           ],

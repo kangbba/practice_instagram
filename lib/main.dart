@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:practiceinsta/constants/material_white.dart';
 import 'package:practiceinsta/home_page.dart';
 import 'package:practiceinsta/models/firebase_auth_state.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
+import 'package:practiceinsta/repo/user_network_repository.dart';
 import 'package:practiceinsta/screens/auth_screen.dart';
 import 'package:practiceinsta/widgets/my_progress_indicator.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +24,13 @@ class MyApp extends StatelessWidget{
 @override
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<FirebaseAuthState>.value(
-      value: _firebaseAuthState,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<FirebaseAuthState>.value(
+        value: _firebaseAuthState),
+
+        ChangeNotifierProvider<UserModelState>(create: (_) => UserModelState(),),
+      ],
       child: MaterialApp(
         home: Consumer<FirebaseAuthState>(
           builder: (BuildContext context, FirebaseAuthState firebaseAuthState, Widget? child)
@@ -35,7 +42,12 @@ class MyApp extends StatelessWidget{
                 _currentWidget = AuthScreen();
                 break;
               case FirebaseAuthStatus.signin:
-                print(firebaseAuthState.firebaseAuthStatus);
+                UserModelState userModelState = Provider.of<UserModelState>(context, listen: false);
+                userNetworkRepository
+                    .getUserModelStream(firebaseAuthState.firebaseUser!.uid)
+                    .listen((userModel) {
+                  userModelState.userModel = userModel;
+                });
                 _currentWidget = HomePage();
                 break;
               default:

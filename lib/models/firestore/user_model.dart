@@ -21,8 +21,8 @@ class UserModel {
         userName = map[KEY_USERNAME],
         followings = map[KEY_FOLLOWINGS];
 
-  UserModel.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data() as Map<String, dynamic>, snapshot.id, reference : snapshot.reference);
+      UserModel.fromSnapshot(DocumentSnapshot snapshot)
+          : this.fromMap(snapshot.data() as Map<String, dynamic>, snapshot.id, reference : snapshot.reference);
 
   static Map<String, dynamic> getMapForCreateUser(String email)
   {

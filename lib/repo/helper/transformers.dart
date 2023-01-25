@@ -5,7 +5,7 @@ import 'package:practiceinsta/models/firestore/user_model.dart';
 
 class Transformers{
 
-  final toUser = StreamTransformer<DocumentSnapshot<dynamic>, UserModel>.fromHandlers(
+  final StreamTransformer<DocumentSnapshot<Map<String,dynamic>>, UserModel> toUser = StreamTransformer<DocumentSnapshot<Map<String,dynamic>>, UserModel>.fromHandlers(
       handleData : (snapshot, sink) async{
         sink.add(UserModel.fromSnapshot(snapshot));
       }

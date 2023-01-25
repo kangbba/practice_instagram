@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
 import 'package:practiceinsta/screens/profile_screen.dart';
 import 'package:practiceinsta/widgets/rounded_avatar.dart';
+import 'package:provider/provider.dart';
 
 import '../constants/common_size.dart';
 import '../constants/screen_size.dart';
@@ -84,7 +86,7 @@ class _ProfileBodyState extends State<ProfileBody> with SingleTickerProviderStat
                             )
                           ]
                       ),
-                      _username(),
+                      _username(context),
                       _userBio(),
                       _editProfileBtn(),
                       _tabButtons(),
@@ -242,11 +244,11 @@ class _ProfileBodyState extends State<ProfileBody> with SingleTickerProviderStat
     );
   }
 
-  Widget _username()
+  Widget _username(BuildContext context)
   {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: common_gap),
-      child: Text('username', style: TextStyle(fontWeight: FontWeight.bold),),
+      child: Text(Provider.of<UserModelState>(context).userModel.userName, style: TextStyle(fontWeight: FontWeight.bold),),
     );
   }
 

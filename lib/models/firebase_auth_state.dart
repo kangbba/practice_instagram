@@ -1,11 +1,17 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:path/path.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
 import 'package:practiceinsta/repo/user_network_repository.dart';
 import 'package:practiceinsta/utils/simple_snackbar.dart';
+import 'package:provider/provider.dart';
+
+import 'firestore/user_model.dart';
 
 enum FirebaseAuthStatus {signout, signin}
 
@@ -15,7 +21,8 @@ class FirebaseAuthState extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   FacebookLogin _facebookLogin = FacebookLogin();
   FirebaseAuthStatus _firebaseAuthStatus = FirebaseAuthStatus.signout;
-  late User _firebaseUser;
+  User? _firebaseUser;
+  User? get firebaseUser => _firebaseUser;
 
   FirebaseAuthStatus get firebaseAuthStatus => _firebaseAuthStatus;
   void watchAuthChange() {
@@ -66,12 +73,12 @@ class FirebaseAuthState extends ChangeNotifier {
   {
       AuthCredential credential = FacebookAuthProvider.credential(token);
       final UserCredential userCredential =  await _firebaseAuth.signInWithCredential(credential);
+      _firebaseUser = userCredential.user;
       if(userCredential.user == null)
       {
         simpleSnackbar(context, 'UserCredential 로그인이 잘안됐음');
       }
       else{
-        _firebaseUser = userCredential.user!;
       }
 
 
@@ -118,8 +125,10 @@ class FirebaseAuthState extends ChangeNotifier {
         .then((value) {
       isSignInProgress = false;
       notifyListeners();
-      changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
     });
+
+
+    changeFirebaseAuthStatus(FirebaseAuthStatus.signin);
   }
   void signUp(BuildContext context, String mEmail, String mPassword) async {
     print('signUp 완료');
@@ -150,17 +159,16 @@ class FirebaseAuthState extends ChangeNotifier {
       notifyListeners();
     });
     notifyListeners();
-    User? user = userCredential.user;
-    if(user == null){
+    _firebaseUser = userCredential.user;
+    if(_firebaseUser == null){
       simpleSnackbar(context, "Please try again later!");
     }
     else{
-      userNetworkRepository.attemptCreateUser(userKey : user.uid, email : user.email!);
+      userNetworkRepository.attemptCreateUser(userKey : _firebaseUser!.uid, email : _firebaseUser!.email!);
       signIn(context, mEmail, mPassword);
     }
-
   }
-  void signOut() async
+  void signOut(UserModelState userModelState) async
   {
     print('signOut 완료');
     changeFirebaseAuthStatus(FirebaseAuthStatus.signout);
@@ -176,6 +184,13 @@ class FirebaseAuthState extends ChangeNotifier {
   void changeFirebaseAuthStatus(FirebaseAuthStatus mFirebaseAuthStatus)
   {
     _firebaseAuthStatus = mFirebaseAuthStatus;
+    if(_firebaseAuth != null)
+    {
+      _firebaseUser = _firebaseAuth.currentUser;
+    }
+    else{
+      throw("why _firebase auth is null");
+    }
     notifyListeners();
   }
 }

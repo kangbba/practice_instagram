@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:practiceinsta/models/firebase_auth_state.dart';
 import 'package:practiceinsta/utils/simple_snackbar.dart';
 import 'package:practiceinsta/widgets/post.dart';
+import 'package:provider/provider.dart';
 
 import '../repo/user_network_repository.dart';
 
@@ -10,10 +13,12 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CupertinoNavigationBar(
-          leading: IconButton(onPressed: null, icon:Icon(CupertinoIcons.camera, color: Colors.black87,)),
-          middle: Text('Instagram', style : TextStyle(fontFamily: 'VeganStyle', color:Colors.black87)),
+    return Consumer<FirebaseAuthState>(
+      builder: (BuildContext context, FirebaseAuthState firebaseAuthState, Widget? child) {
+        return Scaffold(
+          appBar: CupertinoNavigationBar(
+              leading: IconButton(onPressed: null, icon:Icon(CupertinoIcons.camera, color: Colors.black87,)),
+              middle: Text(firebaseAuthState.firebaseUser!.email.toString(), style : TextStyle(fontFamily: 'VeganStyle', color:Colors.black87)),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -34,9 +39,11 @@ class FeedScreen extends StatelessWidget {
             ],
           ),
         ),
-      body: ListView.builder(
+        body: ListView.builder(
         itemBuilder: feedListBuilder,
         itemCount: 30,),
+        );
+      },
     );
   }
 
