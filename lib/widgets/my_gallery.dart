@@ -6,6 +6,8 @@ import 'package:practiceinsta/models/gallery_state.dart';
 import 'package:local_image_provider/local_image_provider.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
+import 'package:practiceinsta/repo/helper/generate_post_key.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/share_post_screen.dart';
@@ -38,15 +40,15 @@ class _MyGalleryState extends State<MyGallery> {
           .map((localImage) => InkWell(
           onTap: () async{
             Uint8List bytes = await localImage.getScaledImageBytes(galleryState.localImageProvider, 0.3);
-            final String timeInMilli = DateTime.now().millisecondsSinceEpoch.toString();
+            final String postKey = getNewPostKey(Provider.of<UserModelState>(context, listen: false).userModel);
             try{
-              final path = join((await getTemporaryDirectory()).path, '$timeInMilli.png');
+              final path = join((await getTemporaryDirectory()).path, '$postKey.png');
               File imageFile = File(path)..writeAsBytesSync(bytes);
               if(!mounted)
               {
                 return;
               }
-              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SharePostScreen(imageFile)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) => SharePostScreen(imageFile, postKey : postKey)));
             }
             catch(e){
 

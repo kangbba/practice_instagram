@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 class SharePostScreen extends StatelessWidget {
 
-  const SharePostScreen(this.file, {Key? key}) : super(key: key);
+  const SharePostScreen(this.file, {Key? key, required this.postKey}) : super(key: key);
   final File file;
+  final String postKey;
 
   @override
   Widget build(BuildContext context) {

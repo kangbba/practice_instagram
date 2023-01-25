@@ -4,6 +4,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:practiceinsta/constants/common_size.dart';
 import 'package:practiceinsta/models/camera_state.dart';
+import 'package:practiceinsta/models/user_model_state.dart';
+import 'package:practiceinsta/repo/helper/generate_post_key.dart';
 import 'package:practiceinsta/screens/share_post_screen.dart';
 import 'package:practiceinsta/widgets/my_progress_indicator.dart';
 import 'package:path/path.dart';
@@ -78,13 +80,14 @@ class _TakePhotoState extends State<TakePhoto> {
   }
 
   void _attemptTakePhoto(CameraState cameraState, BuildContext context) async{
-    final String timeInMilli = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final String postKey = getNewPostKey(Provider.of<UserModelState>(context, listen: false).userModel);
     try {
       final XFile xFile = await cameraState.controller.takePicture();
       if(!mounted){
         return;
       }
-      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> SharePostScreen(File(xFile.path))));
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> SharePostScreen(File(xFile.path), postKey : postKey)));
     }
     catch(e){
 

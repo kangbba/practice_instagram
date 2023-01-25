@@ -38,16 +38,11 @@ class MyApp extends StatelessWidget{
             switch(firebaseAuthState.firebaseAuthStatus)
             {
               case FirebaseAuthStatus.signout:
-                print(firebaseAuthState.firebaseAuthStatus);
+                _clearUserModel(context);
                 _currentWidget = AuthScreen();
                 break;
               case FirebaseAuthStatus.signin:
-                UserModelState userModelState = Provider.of<UserModelState>(context, listen: false);
-                userNetworkRepository
-                    .getUserModelStream(firebaseAuthState.firebaseUser!.uid)
-                    .listen((userModel) {
-                  userModelState.userModel = userModel;
-                });
+                _initUserModel(firebaseAuthState, context);
                 _currentWidget = HomePage();
                 break;
               default:
@@ -65,5 +60,20 @@ class MyApp extends StatelessWidget{
         theme: ThemeData(primarySwatch: white),
       ),
     );
+  }
+
+  void _initUserModel(FirebaseAuthState firebaseAuthState, BuildContext context)
+  {
+    UserModelState userModelState = Provider.of<UserModelState>(context, listen: false);
+    userModelState.currentStreamSub = userNetworkRepository.getUserModelStream(firebaseAuthState.firebaseUser!.uid)
+        .listen((userModel) {
+          userModelState.userModel = userModel;
+    });
+  }
+  void _clearUserModel(BuildContext context)
+  {
+    UserModelState userModelState =
+    Provider.of<UserModelState>(context, listen: false);
+    userModelState.clear();
   }
 }
